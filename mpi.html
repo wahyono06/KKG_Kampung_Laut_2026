@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Prompt MPI Guru SD</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon Pendidikan -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        amber: {
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.4s ease-out forwards',
+                        'bubble-rise': 'bubbleRise 14s infinite ease-in',
+                        'fish-swim': 'fishSwim 26s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        bubbleRise: {
+                            '0%': { transform: 'translateY(105vh) scale(0.7)', opacity: '0' },
+                            '15%': { opacity: '0.65' },
+                            '85%': { opacity: '0.5' },
+                            '100%': { transform: 'translateY(-15vh) scale(1.15)', opacity: '0' }
+                        },
+                        fishSwim: {
+                            '0%': { transform: 'translateX(-12vw) translateY(0px)' },
+                            '50%': { transform: 'translateX(50vw) translateY(-12px)' },
+                            '100%': { transform: 'translateX(112vw) translateY(4px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Kustomisasi Scrollbar & Utilitas Halus */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0f2fe;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284c7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0369a1;
+        }
+        
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px -5px rgba(3, 105, 161, 0.14), 0 8px 10px -6px rgba(14, 165, 233, 0.08);
+        }
+
+        /* Gaya Pilihan Radio/Checkbox Kustom */
+        .option-card input:checked + div {
+            border-color: #0284c7;
+            background: linear-gradient(135deg, #bae6fd 0%, #fef3c7 100%);
+            box-shadow: 0 4px 12px -2px rgba(2, 132, 199, 0.25);
+        }
+        .option-card input:checked + div .check-badge {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Latar Belakang Tema Aquarium Jernih & Bercahaya */
+        .bg-edu-pattern {
+            background-color: #d8f1fc;
+            background-image: 
+                radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.85) 0%, rgba(125, 211, 252, 0.35) 45%, transparent 75%),
+                radial-gradient(at 10% 20%, rgba(56, 189, 248, 0.24) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(20, 184, 166, 0.22) 0px, transparent 50%),
+                linear-gradient(180deg, #e0f5fe 0%, #bae6fd 55%, #99f6e4 100%);
+            background-attachment: fixed;
+        }
+
+        /* Gelembung & Dekorasi Aquarium Latar */
+        .aqua-bubble {
+            position: fixed;
+            bottom: -40px;
+            border-radius: 9999px;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(186,230,253,0.35) 60%, rgba(2,132,199,0.2));
+            border: 1px solid rgba(255,255,255,0.75);
+            box-shadow: inset 0 0 6px rgba(255,255,255,0.8);
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-edu-pattern text-slate-800 antialiased selection:bg-sky-300 selection:text-sky-950 min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Dekorasi Gelembung & Ikan Aquarium Lembut di Latar Belakang -->
+    <div aria-hidden="true" class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="aqua-bubble w-4 h-4 left-[8%] animate-bubble-rise" style="animation-duration: 13s; animation-delay: 0s;"></div>
+        <div class="aqua-bubble w-6 h-6 left-[22%] animate-bubble-rise" style="animation-duration: 17s; animation-delay: 3s;"></div>
+        <div class="aqua-bubble w-3 h-3 left-[41%] animate-bubble-rise" style="animation-duration: 12s; animation-delay: 6s;"></div>
+        <div class="aqua-bubble w-5 h-5 left-[64%] animate-bubble-rise" style="animation-duration: 16s; animation-delay: 2s;"></div>
+        <div class="aqua-bubble w-7 h-7 left-[82%] animate-bubble-rise" style="animation-duration: 19s; animation-delay: 5s;"></div>
+        <div class="aqua-bubble w-3.5 h-3.5 left-[93%] animate-bubble-rise" style="animation-duration: 14s; animation-delay: 1s;"></div>
+        <!-- Ikan hias berenang perlahan -->
+        <div class="fixed top-28 left-0 text-2xl opacity-35 animate-fish-swim select-none">🐠</div>
+        <div class="fixed bottom-24 left-0 text-xl opacity-30 animate-fish-swim select-none" style="animation-duration: 34s; animation-delay: 8s;">🐟</div>
+    </div>
+
+    <!-- Toast Notification Container (Pengganti alert) -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- Header & Navigasi -->
+    <header class="bg-gradient-to-r from-sky-900 via-cyan-800 to-teal-800 text-white shadow-lg sticky top-0 z-40 border-b-4 border-amber-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between py-4 gap-4">
+                <!-- Brand & Ikon Pendidikan -->
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-400 text-sky-950 flex items-center justify-center shadow-md shrink-0 animate-float">
+                        <i class="fa-solid fa-fish-fins text-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-white">
+                                GENERATOR PROMPT MPI GURU SD
+                            </h1>
+                            <span class="px-2.5 py-0.5 text-xs font-bold bg-amber-400 text-sky-950 rounded-full shadow-sm">
+                                Kurikulum Merdeka
+                            </span>
+                        </div>
+                        <p class="text-sky-100 text-xs sm:text-sm mt-0.5">
+                            Asisten Cerdas Pembuatan Media Pembelajaran Interaktif untuk Guru Sekolah Dasar
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigasi Sederhana -->
+                <nav class="flex items-center gap-2 self-start md:self-auto bg-sky-950/50 p-1.5 rounded-xl border border-cyan-500/40">
+                    <button type="button" onclick="switchTab('builder')" id="nav-builder" class="nav-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-amber-400 text-sky-950 shadow-sm">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Buat Prompt</span>
+                    </button>
+                    <button type="button" onclick="switchTab('result')" id="nav-result" class="nav-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-sky-100 hover:bg-sky-800">
+                        <i class="fa-solid fa-file-code"></i>
+                        <span>Hasil Prompt</span>
+                        <span id="badge-ready" class="hidden w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                    </button>
+                    <button type="button" onclick="switchTab('history')" id="nav-history" class="nav-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-sky-100 hover:bg-sky-800">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Riwayat</span>
+                        <span id="history-count" class="px-1.5 py-0.2 bg-sky-800 text-amber-300 rounded-md text-xs">0</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- TAB 1: FORMULIR PEMBUATAN PROMPT -->
+        <section id="tab-builder" class="animate-fade-in space-y-6">
+            
+            <!-- Banner Panduan Singkat -->
+            <div class="bg-gradient-to-r from-sky-800 via-cyan-700 to-teal-700 text-white rounded-2xl p-4 sm:p-5 border border-cyan-300/40 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div class="flex items-start gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-amber-400/20 border border-amber-300/40 text-amber-300 flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
+                        <i class="fa-solid fa-water text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-display font-bold text-white text-sm sm:text-base">Rancang Media Pembelajaran Interaktif Impian Anda</h2>
+                        <p class="text-sky-100 text-xs sm:text-sm mt-0.5">Lengkapi pengaturan di bawah ini. Setiap pilihan Anda akan dirangkai menjadi instruksi (prompt) terstruktur yang siap ditempel ke <strong class="text-amber-300">Gemini AI</strong> untuk menghasilkan aplikasi web MPI siap pakai.</p>
+                    </div>
+                </div>
+                <button type="button" onclick="fillDemoData()" class="shrink-0 px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-sky-950 rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-bolt text-sky-900"></i>
+                    Isi Contoh Cepat
+                </button>
+            </div>
+
+            <form id="mpi-form" class="grid grid-cols-1 lg:grid-cols-12 gap-6" novalidate>
+                
+                <!-- KOLOM KIRI (7 Kolom di Desktop) -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- KARTU 1: IDENTITAS PEMBELAJARAN -->
+                    <div class="relative z-30 bg-gradient-to-br from-emerald-50/95 via-white/95 to-teal-50/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 shadow-md border-2 border-emerald-200/80 card-hover">
+                        <div class="flex items-center gap-3 pb-4 mb-5 border-b border-emerald-200/70">
+                            <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-800 text-amber-300 flex items-center justify-center font-bold text-sm shadow-sm">1</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-emerald-950">Identitas & Topik Pembelajaran</h3>
+                                <p class="text-xs text-emerald-700/80">Informasi dasar yang akan ditampilkan pada halaman pembuka MPI</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Nama Guru -->
+                            <div>
+                                <label for="namaGuru" class="block text-xs font-semibold text-emerald-900 mb-1.5">
+                                    Nama Guru <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-600">
+                                        <i class="fa-solid fa-chalkboard-user text-sm"></i>
+                                    </span>
+                                    <input type="text" id="namaGuru" required placeholder="Contoh: Siti Aminah, S.Pd."
+                                        class="w-full pl-9 pr-3 py-2.5 bg-emerald-50/60 border border-emerald-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                                </div>
+                                <p id="err-namaGuru" class="hidden text-xs text-rose-600 mt-1"><i class="fa-solid fa-circle-exclamation mr-1"></i>Nama guru wajib diisi.</p>
+                            </div>
+
+                            <!-- Nama Sekolah -->
+                            <div>
+                                <label for="namaSekolah" class="block text-xs font-semibold text-emerald-900 mb-1.5">
+                                    Nama Sekolah <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-emerald-600">
+                                        <i class="fa-solid fa-school text-sm"></i>
+                                    </span>
+                                    <input type="text" id="namaSekolah" required placeholder="Contoh: SDN Merdeka 01"
+                                        class="w-full pl-9 pr-3 py-2.5 bg-emerald-50/60 border border-emerald-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                                </div>
+                                <p id="err-namaSekolah" class="hidden text-xs text-rose-600 mt-1"><i class="fa-solid fa-circle-exclamation mr-1"></i>Nama sekolah wajib diisi.</p>
+                            </div>
+
+                            <!-- Kelas -->
+                            <div>
+                                <label for="kelas" class="block text-xs font-semibold text-emerald-900 mb-1.5">
+                                    Kelas <span class="text-rose-500">*</span>
+                                </label>
+                                <select id="kelas" class="w-full px-3 py-2.5 bg-emerald-50/60 border border-emerald-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+                                    <option value="Kelas I (Fase A)">Kelas I (Fase A)</option>
+                                    <option value="Kelas II (Fase A)">Kelas II (Fase A)</option>
+                                    <option value="Kelas III (Fase B)">Kelas III (Fase B)</option>
+                                    <option value="Kelas IV (Fase B)" selected>Kelas IV (Fase B)</option>
+                                    <option value="Kelas V (Fase C)">Kelas V (Fase C)</option>
+                                    <option value="Kelas VI (Fase C)">Kelas VI (Fase C)</option>
+                                </select>
+                            </div>
+
+                            <!-- Semester -->
+                            <div>
+                                <label for="semester" class="block text-xs font-semibold text-emerald-900 mb-1.5">
+                                    Semester <span class="text-rose-500">*</span>
+                                </label>
+                                <select id="semester" class="w-full px-3 py-2.5 bg-emerald-50/60 border border-emerald-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+                                    <option value="Semester 1 (Ganjil)">Semester 1 (Ganjil)</option>
+                                    <option value="Semester 2 (Genap)">Semester 2 (Genap)</option>
+                                </select>
+                            </div>
+
+                            <!-- Mata Pelajaran -->
+                            <div class="relative" id="mapel-wrapper">
+                                <label for="mataPelajaran" class="block text-xs font-semibold text-emerald-900 mb-1.5">
+                                    Mata Pelajaran <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="text" id="mataPelajaran" required autocomplete="off"
+                                        placeholder="Pilih atau ketik mata pelajaran..."
+                                        onfocus="openMapelDropdown(false)"
+                                        oninput="openMapelDropdown(true)"
+                                        class="w-full pl-3 pr-9 py-2.5 bg-emerald-50/60 border border-emerald-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+                                    <button type="button" onclick="toggleMapelDropdown()" tabindex="-1" title="Tampilkan semua daftar mapel"
+                                        class="absolute inset-y-0 right-0 px-3 flex items-center text-emerald-600 hover:text-emerald-800 cursor-pointer">
+                                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                                    </button>
+                                </div>
+                                <!-- Dropdown Kustom Semua Daftar Mapel -->
+                                <div id="mapel-dropdown" class="hidden absolute z-50 left-0 right-0 mt-1.5 bg-white border-2 border-emerald-300 rounded-xl shadow-2xl max-h-56 overflow-y-auto py-1">
+                                    <!-- Diisi otomatis oleh JavaScript -->
+                                </div>
+                                <p id="err-mataPelajaran" class="hidden text-xs text-rose-600 mt-1"><i class="fa-solid fa-circle-exclamation mr-1"></i>Mata pelajaran wajib diisi.</p>
+                            </div>
+
+                            <!-- Materi Pembelajaran -->
+                            <div>
+                                <label for="materiPembelajaran" class="block text-xs font-semibold text-emerald-900 mb-1.5">
+                                    Topik / Materi Pembelajaran <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" id="materiPembelajaran" required placeholder="Contoh: Siklus Air dan Manfaatnya"
+                                    class="w-full px-3 py-2.5 bg-emerald-50/60 border border-emerald-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+                                <p id="err-materiPembelajaran" class="hidden text-xs text-rose-600 mt-1"><i class="fa-solid fa-circle-exclamation mr-1"></i>Topik materi wajib diisi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KARTU 2: TEMA VISUAL -->
+                    <div class="bg-gradient-to-br from-teal-50/95 via-emerald-50/90 to-amber-50/85 backdrop-blur-sm rounded-2xl p-5 sm:p-6 shadow-md border-2 border-emerald-200/80 card-hover">
+                        <div class="flex items-center gap-3 pb-4 mb-5 border-b border-emerald-200/70">
+                            <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-800 text-amber-300 flex items-center justify-center font-bold text-sm shadow-sm">2</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-emerald-950">Tema Visual Antarmuka (UI)</h3>
+                                <p class="text-xs text-emerald-700/80">Hanya mengatur tampilan latar & dekorasi layar (tidak mengubah isi materi/soal)</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="tema-grid">
+                            <!-- Tema Items -->
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Hutan Ajaib" class="sr-only" checked onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🌳</span>
+                                    <span class="text-xs font-bold text-slate-800">Hutan Ajaib</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Dunia Bawah Laut" class="sr-only" onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🐠</span>
+                                    <span class="text-xs font-bold text-slate-800">Dunia Bawah Laut</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Luar Angkasa" class="sr-only" onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🚀</span>
+                                    <span class="text-xs font-bold text-slate-800">Luar Angkasa</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Kerajaan Dongeng" class="sr-only" onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🏰</span>
+                                    <span class="text-xs font-bold text-slate-800">Kerajaan Dongeng</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Laboratorium Sains" class="sr-only" onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🧪</span>
+                                    <span class="text-xs font-bold text-slate-800">Laboratorium Sains</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Taman Sekolah" class="sr-only" onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🌻</span>
+                                    <span class="text-xs font-bold text-slate-800">Taman Sekolah</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Dunia Dinosaurus" class="sr-only" onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🦕</span>
+                                    <span class="text-xs font-bold text-slate-800">Dunia Dinosaurus</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Desa Nusantara" class="sr-only" onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🏡</span>
+                                    <span class="text-xs font-bold text-slate-800">Desa Nusantara</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+
+                            <label class="option-card cursor-pointer relative">
+                                <input type="radio" name="temaVisual" value="Tema Bebas" id="radio-tema-bebas" class="sr-only" onchange="toggleTemaBebas()">
+                                <div class="p-3 rounded-xl bg-white/75 border-2 border-emerald-200/80 hover:border-emerald-400 transition h-full flex flex-col items-center text-center gap-1.5">
+                                    <span class="text-2xl">🎨</span>
+                                    <span class="text-xs font-bold text-slate-800">Tema Bebas</span>
+                                    <span class="check-badge opacity-0 transform scale-75 transition-all absolute top-2 right-2 text-emerald-600 text-xs"><i class="fa-solid fa-circle-check"></i></span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Input Tema Bebas (Muncul jika Tema Bebas dipilih) -->
+                        <div id="box-tema-bebas" class="hidden mt-4 pt-3 border-t border-emerald-200/70 animate-fade-in">
+                            <label for="inputTemaBebas" class="block text-xs font-semibold text-emerald-900 mb-1.5">
+                                Tuliskan Deskripsi Tema Kustom Anda:
+                            </label>
+                            <input type="text" id="inputTemaBebas" placeholder="Contoh: Stasiun Kereta Api Masa Depan atau Pasar Tradisional Ramah Lingkungan"
+                                class="w-full px-3.5 py-2.5 bg-white/90 border border-emerald-300 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                    </div>
+
+                    <!-- KARTU 3: PENGATURAN DESAIN & ANIMASI -->
+                    <div class="bg-gradient-to-br from-emerald-50/95 via-white/95 to-emerald-100/70 backdrop-blur-sm rounded-2xl p-5 sm:p-6 shadow-md border-2 border-emerald-200/80 card-hover">
+                        <div class="flex items-center gap-3 pb-4 mb-5 border-b border-emerald-200/70">
+                            <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-800 text-amber-300 flex items-center justify-center font-bold text-sm shadow-sm">3</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-emerald-950">Pengaturan Desain & Animasi</h3>
+                                <p class="text-xs text-emerald-700/80">Atur estetika antarmuka, bentuk tombol, dan efek interaktif</p>
+                            </div>
+                        </div>
+
+                        <!-- Warna & Gaya Visual -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                            <!-- Warna Dominan -->
+                            <div>
+                                <label class="block text-xs font-semibold text-emerald-900 mb-1.5">Warna Dominan</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="color" id="warnaDominan" value="#10b981" onchange="syncColorText('warnaDominan', 'warnaDominanText')" class="w-10 h-10 rounded-lg border border-emerald-200 cursor-pointer p-0.5 bg-white">
+                                    <select id="warnaDominanPreset" onchange="applyColorPreset('warnaDominan', 'warnaDominanText', this.value)" class="flex-1 px-3 py-2 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs font-medium">
+                                        <option value="#10b981">Hijau Zamrud Segar (#10b981)</option>
+                                        <option value="#15803d">Hijau Hutan Alami (#15803d)</option>
+                                        <option value="#0d9488">Hijau Tosca Alam (#0d9488)</option>
+                                        <option value="#0ea5e9">Biru Langit Cerah (#0ea5e9)</option>
+                                        <option value="#1d4ed8">Biru Samudra Dalam (#1d4ed8)</option>
+                                        <option value="#4f46e5">Biru Indigo Sains (#4f46e5)</option>
+                                        <option value="#7c3aed">Ungu Galaksi / Fantasi (#7c3aed)</option>
+                                        <option value="#b45309">Cokelat Kayu Nusantara (#b45309)</option>
+                                        <option value="#ea580c">Oranye Terakota Hangat (#ea580c)</option>
+                                        <option value="#dc2626">Merah Semangat Belajar (#dc2626)</option>
+                                        <option value="#db2777">Merah Muda Ceria (#db2777)</option>
+                                        <option value="#334155">Abu-Abu Batu Tulis Modern (#334155)</option>
+                                    </select>
+                                    <input type="hidden" id="warnaDominanText" value="#10b981">
+                                </div>
+                            </div>
+
+                            <!-- Warna Aksen -->
+                            <div>
+                                <label class="block text-xs font-semibold text-emerald-900 mb-1.5">Warna Aksen (Tombol/Sorotan)</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="color" id="warnaAksen" value="#fbbf24" onchange="syncColorText('warnaAksen', 'warnaAksenText')" class="w-10 h-10 rounded-lg border border-emerald-200 cursor-pointer p-0.5 bg-white">
+                                    <select id="warnaAksenPreset" onchange="applyColorPreset('warnaAksen', 'warnaAksenText', this.value)" class="flex-1 px-3 py-2 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs font-medium">
+                                        <option value="#fbbf24">Kuning Keemasan (#fbbf24)</option>
+                                        <option value="#f59e0b">Emas Madu Hangat (#f59e0b)</option>
+                                        <option value="#84cc16">Hijau Daun Muda / Limau (#84cc16)</option>
+                                        <option value="#22c55e">Hijau Terang Segar (#22c55e)</option>
+                                        <option value="#06b6d4">Biru Sian Kristal (#06b6d4)</option>
+                                        <option value="#38bdf8">Biru Langit Muda (#38bdf8)</option>
+                                        <option value="#fb923c">Jingga Matahari (#fb923c)</option>
+                                        <option value="#f43f5e">Merah Koral Cerah (#f43f5e)</option>
+                                        <option value="#e879f9">Magenta Lembayung (#e879f9)</option>
+                                        <option value="#fde047">Kuning Lemon Cerah (#fde047)</option>
+                                    </select>
+                                    <input type="hidden" id="warnaAksenText" value="#fbbf24">
+                                </div>
+                            </div>
+
+                            <!-- Gaya Visual Ilustrasi -->
+                            <div>
+                                <label for="gayaVisual" class="block text-xs font-semibold text-emerald-900 mb-1.5">Gaya Ilustrasi & UI</label>
+                                <select id="gayaVisual" class="w-full px-3 py-2.5 bg-emerald-50/70 border border-emerald-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
+                                    <option value="Realistis Detail & Konkret (Tekstur alami nyata, pencahayaan bertingkat, detail anatomi/struktur seperti daun bertulang nyata, bayangan realistis agar konkret untuk kelas tinggi SD)">Realistis Detail & Konkret (Nyata & Akurat)</option>
+                                    <option value="Diorama 3D Realistis (Render 3D bertekstur nyata dengan kedalaman ruang, bayangan lembut, dan tampilan objek konkret)">Diorama 3D Realistis</option>
+                                    <option value="Ilustrasi Semi-Realistis (Perpaduan detail bentuk nyata yang proporsional dengan sentuhan artistik ramah siswa SD)">Ilustrasi Semi-Realistis</option>
+                                    <option value="Kartun 3D (Ceria, Berdimensi & Ramah Anak)">Kartun 3D Ceria</option>
+                                    <option value="Flat Design Modern (Bersih, Vektor Rapi & Warna Cerah)">Flat Design Modern</option>
+                                </select>
+                            </div>
+
+                            <!-- Bentuk Tombol -->
+                            <div>
+                                <label for="bentukTombol" class="block text-xs font-semibold text-emerald-900 mb-1.5">Bentuk Tombol Interaktif</label>
+                                <select id="bentukTombol" class="w-full px-3 py-2.5 bg-emerald-50/70 border border-emerald-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
+                                    <option value="Bubble (Bulat menggelembung dengan efek kilau 3D)">Bubble (Gelembung 3D)</option>
+                                    <option value="Daun (Sudut melengkung organik menyerupai helai daun)">Daun (Organik Alam)</option>
+                                    <option value="Kayu (Papan kayu bertekstur hangat dengan bingkai alami)">Kayu (Papan Petualangan)</option>
+                                    <option value="Kristal (Segi geometris berkilau seperti permata)">Kristal (Permata Berkilau)</option>
+                                    <option value="Rounded (Sudut membulat modern dengan bayangan lembut)">Rounded (Membulat Modern)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Pengaturan Animasi & Efek Suara -->
+                        <div>
+                            <label class="block text-xs font-semibold text-emerald-900 mb-2">Efek Animasi & Audio Interaktif (Pilih yang diinginkan):</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="animasi-group">
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-100/70 cursor-pointer text-xs font-medium transition">
+                                    <input type="checkbox" name="animasi" value="Gelembung bergerak melayang lembut" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                    <span>🫧 Gelembung bergerak</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-100/70 cursor-pointer text-xs font-medium transition">
+                                    <input type="checkbox" name="animasi" value="Daun berguguran perlahan di latar belakang" class="rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                    <span>🍃 Daun berguguran</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-100/70 cursor-pointer text-xs font-medium transition">
+                                    <input type="checkbox" name="animasi" value="Bintang berkilauan (twinkling stars)" class="rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                    <span>✨ Bintang berkilauan</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-100/70 cursor-pointer text-xs font-medium transition">
+                                    <input type="checkbox" name="animasi" value="Karakter pemandu bergerak interaktif (idle & ekspresi)" class="rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                    <span>🧸 Karakter bergerak</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-100/70 cursor-pointer text-xs font-medium transition">
+                                    <input type="checkbox" name="animasi" value="Efek riak air saat tombol diklik" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                    <span>💧 Efek riak air</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-100/70 cursor-pointer text-xs font-medium transition">
+                                    <input type="checkbox" name="animasi" value="Animasi transisi halaman yang halus" class="rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                    <span>🎞️ Animasi transisi</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-amber-300/90 bg-gradient-to-r from-amber-100/90 to-yellow-50/90 hover:from-amber-200/80 cursor-pointer text-xs font-semibold text-amber-950 transition col-span-2 sm:col-span-3">
+                                    <input type="checkbox" name="animasi" value="Efek suara (Web Audio API / Tone.js) untuk klik tombol, jawaban benar, dan selebrasi selesai" class="rounded text-amber-600 focus:ring-amber-500" checked>
+                                    <span>🔊 Efek suara interaktif (klik tombol, benar/salah, & musik selebrasi tanpa file eksternal)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KOLOM KANAN (5 Kolom di Desktop) -->
+                <div class="lg:col-span-5 space-y-6">
+                    
+                    <!-- KARTU 4: PENGATURAN MATERI -->
+                    <div class="bg-gradient-to-br from-emerald-50/95 via-teal-50/90 to-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-6 shadow-md border-2 border-emerald-200/80 card-hover">
+                        <div class="flex items-center gap-3 pb-4 mb-4 border-b border-emerald-200/70">
+                            <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-800 text-amber-300 flex items-center justify-center font-bold text-sm shadow-sm">4</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-emerald-950">Struktur Materi Pembelajaran</h3>
+                                <p class="text-xs text-emerald-700/80">Komponen pedagogis yang wajib disusun otomatis oleh AI</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-emerald-100/90 to-amber-100/70 border border-emerald-300/70 rounded-xl p-3 mb-4 flex items-start gap-2.5">
+                            <i class="fa-solid fa-wand-sparkles text-emerald-700 mt-0.5 text-sm"></i>
+                            <p class="text-xs text-emerald-950 leading-relaxed">
+                                <strong>Penyusunan Otomatis:</strong> AI akan menyesuaikan kedalaman bahasa, kosakata, dan alur penyampaian agar cocok dengan tahap perkembangan kognitif siswa pada <strong>Kelas & Topik</strong> yang Anda pilih.
+                            </p>
+                        </div>
+
+                        <!-- Pengaturan Tujuan Pembelajaran (TP): Otomatis vs Manual -->
+                        <div class="mb-4 p-3.5 rounded-xl bg-white/85 border border-emerald-200/90 space-y-2.5">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                <label class="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-bullseye text-emerald-600"></i>
+                                    <span>Tujuan Pembelajaran (TP)</span>
+                                </label>
+                                <div class="inline-flex rounded-lg bg-emerald-100/80 p-1 border border-emerald-200 self-start sm:self-auto">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="modeTP" value="otomatis" class="sr-only peer" checked onchange="toggleModeTP()">
+                                        <span class="block px-2.5 py-1 rounded-md text-[11px] font-bold text-emerald-800 peer-checked:bg-emerald-600 peer-checked:text-white transition">
+                                            ✨ Otomatis
+                                        </span>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="modeTP" value="manual" id="radio-tp-manual" class="sr-only peer" onchange="toggleModeTP()">
+                                        <span class="block px-2.5 py-1 rounded-md text-[11px] font-bold text-emerald-800 peer-checked:bg-amber-400 peer-checked:text-emerald-950 transition">
+                                            ✍️ Manual
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <p id="info-tp-otomatis" class="text-[11px] text-slate-600 leading-relaxed">
+                                Sistem akan menginstruksikan Gemini AI untuk merumuskan 2–3 Tujuan Pembelajaran (TP) terukur yang sesuai dengan Capaian Pembelajaran (CP) kelas dan topik materi.
+                            </p>
+
+                            <!-- Kolom Isian TP Manual (Muncul saat pilih Manual) -->
+                            <div id="box-tp-manual" class="hidden pt-1 animate-fade-in">
+                                <textarea id="inputTPManual" rows="3" placeholder="Tuliskan Tujuan Pembelajaran (TP) Anda di sini...&#10;Contoh:&#10;1. Peserta didik mampu menjelaskan tahapan siklus air dengan benar.&#10;2. Peserta didik mampu menganalisis dampak kegiatan manusia terhadap siklus air."
+                                    class="w-full px-3 py-2 bg-emerald-50/50 border border-emerald-300 rounded-xl text-xs text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"></textarea>
+                                <p id="err-inputTPManual" class="hidden text-xs text-rose-600 mt-1"><i class="fa-solid fa-circle-exclamation mr-1"></i>Silakan isi Tujuan Pembelajaran (TP) atau ubah mode ke Otomatis.</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5" id="materi-group">
+                            <label class="flex items-start gap-3 p-3 rounded-xl bg-white/80 border border-emerald-200/80 hover:border-emerald-400 hover:bg-emerald-50/80 cursor-pointer transition">
+                                <input type="checkbox" name="komponenMateri" value="Aktivitas interaktif eksplorasi materi (seperti kartu flip, kuis kilat, atau pencocokan bagian)" class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                <div>
+                                    <span class="block text-xs font-bold text-slate-800">🕹️ Aktivitas Interaktif Eksplorasi</span>
+                                    <span class="block text-[11px] text-slate-500">Kartu buka-tutup, label interaktif, atau eksplorasi bertahap</span>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-amber-50/90 to-emerald-50/90 border border-amber-300/80 hover:border-amber-400 cursor-pointer transition">
+                                <input type="checkbox" id="simulasiInteraktif" name="komponenMateri" value="Menu Khusus Simulasi Interaktif Langsung (Hands-on Simulation) sesuai topik materi agar siswa dapat mempraktikkan konsep secara nyata" class="mt-0.5 rounded text-amber-600 focus:ring-amber-500" checked onchange="toggleOpsiSimulasi()">
+                                <div class="flex-1">
+                                    <span class="block text-xs font-bold text-emerald-950">🔬 Menu Simulasi Praktik Langsung (Sangat Disarankan)</span>
+                                    <span class="block text-[11px] text-slate-600">Simulasi nyata sesuai topik (misal: fotosintesis daun, rantai/jaring makanan, eksperimen virtual, atau manipulasi benda)</span>
+                                    
+                                    <!-- Pilihan Gaya Visual Simulasi (Muncul saat Simulasi dicentang) -->
+                                    <div id="box-gaya-simulasi" class="mt-2.5 pt-2 border-t border-amber-300/60" onclick="event.stopPropagation()">
+                                        <label for="gayaSimulasi" class="block text-[11px] font-bold text-emerald-900 mb-1">
+                                            Visual & Tingkat Realisme Simulasi:
+                                        </label>
+                                        <select id="gayaSimulasi" class="w-full px-2.5 py-1.5 bg-white border border-amber-300 rounded-lg text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                            <option value="Sangat Realistis & Konkret (Objek simulasi seperti daun bertulang nyata, sinar matahari, tetesan air, makhluk hidup, atau alat lab digambar detail bertekstur alami dengan efek cahaya/bayangan dan animasi proses fisika/biologi nyata — bukan kotak teks polos)">🌿 Sangat Realistis & Konkret (Tekstur & Proses Nyata)</option>
+                                            <option value="Laboratorium Virtual / Eksperimen Sains Nyata (Dilengkapi alat ukur, pengatur variabel slider/tombol, indikator hasil langsung, dan visual reaksi nyata)">🧪 Laboratorium Virtual / Eksperimen Nyata</option>
+                                            <option value="Diorama Alam / Ekosistem Interaktif 3D-Look (Tampilan lingkungan berlapis kedalaman ruang, objek proporsional nyata, dan interaksi sebab-akibat langsung)">🏞️ Diorama Alam / Ekosistem Konkret</option>
+                                            <option value="Semi-Realistis Edukatif (Perpaduan bentuk objek nyata yang jelas dengan label penjelas ramah anak)">🎨 Semi-Realistis Edukatif</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-sky-50/95 to-emerald-50/90 border border-sky-300/80 hover:border-sky-400 cursor-pointer transition">
+                                <input type="checkbox" id="gameEdukasiInteraktif" name="komponenMateri" value="Menu Khusus Game Edukasi Interaktif (Mini-Game edukatif berbasis poin dan tantangan menyenangkan untuk memperkuat pemahaman materi)" class="mt-0.5 rounded text-sky-600 focus:ring-sky-500" checked onchange="toggleOpsiGame()">
+                                <div class="flex-1">
+                                    <span class="block text-xs font-bold text-emerald-950">🎮 Menu Game Edukasi Interaktif (Terintegrasi)</span>
+                                    <span class="block text-[11px] text-slate-600">Mini-game seru berbasis poin/skor agar siswa belajar sambil bermain dalam satu aplikasi</span>
+                                    
+                                    <!-- Pilihan Jenis Game Edukasi (Muncul saat Game Edukasi dicentang) -->
+                                    <div id="box-jenis-game" class="mt-2.5 pt-2 border-t border-sky-300/60" onclick="event.stopPropagation()">
+                                        <label for="jenisGameEdukasi" class="block text-[11px] font-bold text-sky-900 mb-1">
+                                            Pilih Jenis Permainan Edukatif:
+                                        </label>
+                                        <select id="jenisGameEdukasi" class="w-full px-2.5 py-1.5 bg-white border border-sky-300 rounded-lg text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                            <option value="Otomatis Sesuai Karakteristik Materi (AI memilihkan format mini-game edukatif paling seru dan cocok dengan topik materi)">✨ Otomatis Sesuai Karakteristik Materi</option>
+                                            <option value="Petualangan Kuis Bertahap (Level & Nyawa: siswa melewati 3 pos tantangan dengan 3 ikon nyawa/hati dan mengumpulkan bintang poin)">🗺️ Petualangan Kuis Bertahap (Level & Nyawa)</option>
+                                            <option value="Tebak Cepat Berbatas Waktu (Speed Challenge: jawab pertanyaan/klasifikasi kilat sebelum waktu habis untuk meraih skor kombo tertinggi)">⚡ Tebak Cepat Berbatas Waktu (Speed Challenge)</option>
+                                            <option value="Tangkap / Klik Objek yang Tepat (Catch & Sort: klik/tangkap objek atau pernyataan yang benar sesuai materi dan hindari pengecoh)">🎯 Tangkap / Klik Objek yang Tepat (Catch & Sort)</option>
+                                            <option value="Susun Urutan / Pasangan Pintar (Interactive Matching & Ordering: pasangkan kartu konsep atau susun tahapan proses secara berurutan dengan skor waktu)">🧩 Susun Urutan / Pasangan Pintar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start gap-3 p-3 rounded-xl bg-white/80 border border-emerald-200/80 hover:border-emerald-400 hover:bg-emerald-50/80 cursor-pointer transition">
+                                <input type="checkbox" name="komponenMateri" value="Contoh soal beserta langkah pembahasan yang mudah dipahami siswa" class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                <div>
+                                    <span class="block text-xs font-bold text-slate-800">💡 Contoh Soal & Pembahasan</span>
+                                    <span class="block text-[11px] text-slate-500">Latihan terbimbing lengkap dengan cara menjawabnya</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- KARTU 5: PENGATURAN EVALUASI -->
+                    <div class="bg-gradient-to-br from-amber-50/90 via-emerald-50/90 to-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-6 shadow-md border-2 border-emerald-200/80 card-hover">
+                        <div class="flex items-center gap-3 pb-4 mb-4 border-b border-emerald-200/70">
+                            <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-600 to-emerald-800 text-amber-300 flex items-center justify-center font-bold text-sm shadow-sm">5</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-emerald-950">Pengaturan Kuis & Evaluasi</h3>
+                                <p class="text-xs text-emerald-700/80">Konfigurasi soal latihan, tipe soal, dan sistem skor otomatis</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <!-- Jumlah Soal -->
+                            <div>
+                                <label for="jumlahSoal" class="block text-xs font-semibold text-emerald-900 mb-1.5">Jumlah Soal</label>
+                                <select id="jumlahSoal" class="w-full px-3 py-2.5 bg-white/85 border border-emerald-200 rounded-xl text-sm font-semibold text-emerald-900 focus:ring-2 focus:ring-emerald-500">
+                                    <option value="5">5 Soal</option>
+                                    <option value="10" selected>10 Soal</option>
+                                    <option value="15">15 Soal</option>
+                                    <option value="20">20 Soal</option>
+                                </select>
+                            </div>
+
+                            <!-- Tingkat Kesulitan -->
+                            <div>
+                                <label for="tingkatKesulitan" class="block text-xs font-semibold text-emerald-900 mb-1.5">Tingkat Kesulitan</label>
+                                <select id="tingkatKesulitan" class="w-full px-3 py-2.5 bg-white/85 border border-emerald-200 rounded-xl text-sm font-semibold text-emerald-900 focus:ring-2 focus:ring-emerald-500">
+                                    <option value="Mudah (LOTS - Mengingat & Memahami)">Mudah</option>
+                                    <option value="Sedang (MOTS - Menerapkan Konsep)">Sedang</option>
+                                    <option value="Sulit (HOTS - Menganalisis & Mengevaluasi)">Sulit (HOTS)</option>
+                                    <option value="Campuran (Proporsional: Mudah, Sedang, dan Sulit)" selected>Campuran</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Jenis Soal -->
+                        <div class="mb-4">
+                            <label class="block text-xs font-semibold text-emerald-900 mb-2">Bentuk / Tipe Soal (Pilih minimal 1):</label>
+                            <div class="grid grid-cols-2 gap-2" id="tipe-soal-group">
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-50 cursor-pointer text-xs font-semibold">
+                                    <input type="checkbox" name="tipeSoal" value="Pilihan Ganda (4 opsi A, B, C, D)" class="rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                    <span>🔘 Pilihan Ganda</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-50 cursor-pointer text-xs font-semibold">
+                                    <input type="checkbox" name="tipeSoal" value="Benar-Salah (Pernyataan interaktif)" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                    <span>✅ Benar-Salah</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-50 cursor-pointer text-xs font-semibold">
+                                    <input type="checkbox" name="tipeSoal" value="Menjodohkan (Pasangkan konsep dengan jawaban tepat)" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                    <span>🔗 Menjodohkan</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-emerald-200/80 bg-white/80 hover:bg-emerald-50 cursor-pointer text-xs font-semibold">
+                                    <input type="checkbox" name="tipeSoal" value="Isian Singkat (Ketik jawaban yang diperiksa otomatis)" class="rounded text-emerald-600 focus:ring-emerald-500">
+                                    <span>✍️ Isian Singkat</span>
+                                </label>
+                            </div>
+                            <p id="err-tipeSoal" class="hidden text-xs text-rose-600 mt-1"><i class="fa-solid fa-circle-exclamation mr-1"></i>Pilih minimal satu jenis soal.</p>
+                        </div>
+
+                        <!-- Sistem Umpan Balik & Penilaian -->
+                        <div class="space-y-2 pt-3 border-t border-emerald-200/70">
+                            <label class="flex items-center gap-2.5 cursor-pointer text-xs font-semibold text-emerald-950">
+                                <input type="checkbox" id="umpanBalikOtomatis" class="rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                <span>💬 Umpan balik langsung & penjelasan untuk jawaban benar/salah</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 cursor-pointer text-xs font-semibold text-emerald-950">
+                                <input type="checkbox" id="penilaianOtomatis" class="rounded text-emerald-600 focus:ring-emerald-500" checked>
+                                <span>🏆 Penilaian skor otomatis (Skala 0-100) + sertifikat/apresiasi siswa</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- TOMBOL AKSI UTAMA -->
+                    <div class="bg-gradient-to-br from-emerald-900 to-emerald-800 rounded-2xl p-5 shadow-lg border border-emerald-700 text-white space-y-4">
+                        <!-- Pilihan Target Platform AI -->
+                        <div>
+                            <label class="block text-xs font-bold text-amber-300 mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-robot"></i>
+                                <span>Pilih Target Platform AI Pembuat MPI:</span>
+                            </label>
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <label class="cursor-pointer relative">
+                                    <input type="radio" name="targetAI" value="Gemini AI" id="target-gemini" class="sr-only peer" checked>
+                                    <div class="p-3 rounded-xl bg-emerald-950/60 border-2 border-emerald-600/80 peer-checked:bg-sky-900/90 peer-checked:border-amber-400 peer-checked:shadow-md transition h-full flex flex-col justify-between">
+                                        <div class="flex items-center justify-between gap-1 mb-1">
+                                            <span class="text-xs font-extrabold text-white flex items-center gap-1.5">
+                                                <i class="fa-solid fa-sparkles text-sky-400"></i> Gemini AI
+                                            </span>
+                                            <span class="text-[10px] px-1.5 py-0.2 bg-sky-500/30 text-sky-200 rounded font-semibold">Canvas</span>
+                                        </div>
+                                        <p class="text-[10px] text-emerald-200/90 leading-snug">Simulasi mendalam & kode HTML mandiri penuh.</p>
+                                    </div>
+                                </label>
+
+                                <label class="cursor-pointer relative">
+                                    <input type="radio" name="targetAI" value="Canva AI" id="target-canva" class="sr-only peer">
+                                    <div class="p-3 rounded-xl bg-emerald-950/60 border-2 border-emerald-600/80 peer-checked:bg-purple-950/90 peer-checked:border-amber-400 peer-checked:shadow-md transition h-full flex flex-col justify-between">
+                                        <div class="flex items-center justify-between gap-1 mb-1">
+                                            <span class="text-xs font-extrabold text-white flex items-center gap-1.5">
+                                                <i class="fa-solid fa-wand-magic-sparkles text-purple-300"></i> Canva AI
+                                            </span>
+                                            <span class="text-[10px] px-1.5 py-0.2 bg-purple-500/30 text-purple-200 rounded font-semibold">Code</span>
+                                        </div>
+                                        <p class="text-[10px] text-emerald-200/90 leading-snug">Dioptimalkan untuk Canva Code & layar presentasi.</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="generatePrompt()" class="w-full py-3.5 px-6 bg-amber-400 hover:bg-amber-300 active:scale-[0.99] text-emerald-950 font-display font-extrabold text-base rounded-xl shadow-md transition-all flex items-center justify-center gap-2.5 cursor-pointer">
+                            <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                            <span>BUAT PROMPT SEKARANG</span>
+                        </button>
+                        
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <button type="button" onclick="switchTab('result')" class="py-2.5 px-3 bg-emerald-700/80 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl border border-emerald-600 transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-eye text-amber-300"></i>
+                                <span>Lihat Hasil Prompt</span>
+                            </button>
+                            <button type="button" onclick="resetForm()" class="py-2.5 px-3 bg-emerald-950/60 hover:bg-rose-900/60 text-emerald-200 hover:text-white text-xs font-semibold rounded-xl border border-emerald-700/70 transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                <span>Reset Formulir</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </section>
+
+        <!-- TAB 2: HASIL PROMPT & EDITOR -->
+        <section id="tab-result" class="hidden animate-fade-in space-y-6">
+            <div class="bg-gradient-to-br from-emerald-50/95 via-white/95 to-amber-50/90 backdrop-blur-sm rounded-2xl shadow-md border-2 border-emerald-200/80 overflow-hidden">
+                <!-- Header Hasil -->
+                <div class="bg-gradient-to-r from-emerald-800 to-emerald-700 text-white border-b border-emerald-600 p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="px-2.5 py-0.5 bg-amber-400 text-emerald-950 text-xs font-extrabold rounded-full">Siap Digunakan</span>
+                            <span id="result-target-badge" class="px-2.5 py-0.5 bg-sky-500/30 border border-sky-300/40 text-white text-xs font-bold rounded-full">Target: Gemini AI</span>
+                            <span id="result-meta-badge" class="text-xs font-medium text-emerald-100">Belum ada prompt dibuat</span>
+                        </div>
+                        <h2 class="font-display font-bold text-xl text-white mt-1.5">Hasil Prompt Media Pembelajaran Interaktif</h2>
+                        <p class="text-xs text-emerald-100/90 mt-0.5">Anda dapat mengedit teks prompt secara langsung atau beralih cepat antara format <strong>Gemini AI</strong> dan <strong>Canva AI</strong> untuk membandingkan hasilnya.</p>
+                    </div>
+
+                    <!-- Tombol Aksi Hasil -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button type="button" onclick="switchTargetAndRegenerate()" id="btn-switch-target" class="px-3.5 py-2.5 bg-purple-600/90 hover:bg-purple-500 text-white border border-purple-300/40 font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-1.5" title="Buat ulang prompt dari data yang sama untuk platform AI pembanding">
+                            <i class="fa-solid fa-repeat"></i>
+                            <span id="btn-switch-target-label">Ubah ke Versi Canva AI</span>
+                        </button>
+                        <button type="button" onclick="copyPrompt()" class="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-emerald-950 font-bold text-xs sm:text-sm rounded-xl shadow-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-copy"></i>
+                            <span>SALIN PROMPT</span>
+                        </button>
+                        <button type="button" onclick="copyAndOpenTargetAI()" id="btn-open-target-ai" class="px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-sparkles" id="icon-open-target-ai"></i>
+                            <span id="label-open-target-ai">SALIN & BUKA GEMINI AI</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[11px] opacity-85"></i>
+                        </button>
+                        <button type="button" onclick="saveCurrentPromptToHistory()" class="px-4 py-2.5 bg-emerald-900/80 hover:bg-emerald-950 text-white border border-emerald-500/50 font-semibold text-xs sm:text-sm rounded-xl shadow-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-bookmark text-amber-300"></i>
+                            <span>SIMPAN PROMPT</span>
+                        </button>
+                        <button type="button" onclick="switchTab('builder')" class="px-3.5 py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/30 font-semibold text-xs sm:text-sm rounded-xl transition flex items-center gap-2">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Ubah Pengaturan</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Area Editor Prompt -->
+                <div class="p-5 sm:p-6">
+                    <div class="relative">
+                        <textarea id="prompt-output" rows="18" placeholder="Klik tombol 'BUAT PROMPT SEKARANG' pada tab Buat Prompt untuk menghasilkan instruksi lengkap..."
+                            class="w-full p-4 sm:p-5 bg-emerald-950 text-emerald-50 font-mono text-xs sm:text-sm leading-relaxed rounded-2xl border-2 border-emerald-800 focus:border-amber-400 focus:outline-none shadow-inner"></textarea>
+                        
+                        <div class="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-600">
+                            <div class="flex items-center gap-4">
+                                <span id="char-count">0 karakter</span>
+                                <span id="word-count">0 kata</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-emerald-700 font-medium">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span id="result-tip-text">Tips: Tempelkan prompt ini di Gemini AI (Canvas / Chat) untuk langsung mendapatkan aplikasi MPI-nya!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: RIWAYAT PROMPT (LOCALSTORAGE) -->
+        <section id="tab-history" class="hidden animate-fade-in space-y-6">
+            <div class="bg-gradient-to-br from-emerald-50/95 via-white/95 to-teal-50/90 backdrop-blur-sm rounded-2xl p-5 sm:p-6 shadow-md border-2 border-emerald-200/80">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-5 border-b border-emerald-200/70">
+                    <div>
+                        <h2 class="font-display font-bold text-xl text-emerald-950">Riwayat Prompt Tersimpan</h2>
+                        <p class="text-xs text-emerald-700/80 mt-0.5">Tersimpan secara lokal di browser Anda (tidak hilang saat halaman dimuat ulang).</p>
+                    </div>
+                    <button type="button" onclick="clearAllHistory()" id="btn-clear-history" class="px-3.5 py-2 bg-rose-100/80 hover:bg-rose-200 text-rose-800 border border-rose-300 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 self-start sm:self-auto">
+                        <i class="fa-solid fa-trash-can"></i>
+                        <span>Hapus Semua Riwayat</span>
+                    </button>
+                </div>
+
+                <!-- Container Daftar Riwayat -->
+                <div id="history-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Diisi oleh JavaScript -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-900 border-t-2 border-amber-400/60 py-5 mt-auto text-emerald-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-md bg-amber-400/20 text-amber-300 flex items-center justify-center">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </span>
+                <span class="font-semibold text-white">Generator Prompt MPI Guru SD</span>
+                <span class="text-emerald-200/80">&bull; Mendukung Pembelajaran Digital Kreatif</span>
+            </div>
+            <div class="text-center sm:text-right">
+                <div class="font-semibold text-amber-300">KKG Kampung Laut 2026</div>
+                <div class="text-[11px] text-emerald-200/45 tracking-wide select-none">Wahyono, S.Pd.SD</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Kunci penyimpanan localStorage
+        const STORAGE_KEY = 'mpi_guru_sd_prompt_history_v1';
+        let currentPromptMeta = null;
+
+        // Daftar Mata Pelajaran SD
+        const DAFTAR_MAPEL_SD = [
+            'IPAS (Ilmu Pengetahuan Alam dan Sosial)',
+            'Matematika',
+            'Bahasa Indonesia',
+            'Pendidikan Pancasila',
+            'Seni Budaya dan Prakarya (SBdP)',
+            'PJOK',
+            'Bahasa Inggris',
+            'Pendidikan Agama dan Budi Pekerti',
+            'Bahasa Daerah / Muatan Lokal',
+            'Koding & Kecerdasan Artifisial (KKA)'
+        ];
+
+        // Inisialisasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHistory();
+            updateCounts();
+            renderMapelOptions('');
+
+            // Pantau perubahan pada textarea hasil prompt agar hitungan kata/karakter selalu akurat
+            const outputArea = document.getElementById('prompt-output');
+            outputArea.addEventListener('input', updateCounts);
+
+            // Tutup dropdown mapel jika klik di luar area
+            document.addEventListener('click', (e) => {
+                const wrapper = document.getElementById('mapel-wrapper');
+                if (wrapper && !wrapper.contains(e.target)) {
+                    document.getElementById('mapel-dropdown').classList.add('hidden');
+                }
+            });
+        });
+
+        // Fungsi Dropdown Kustom Mata Pelajaran (Selalu bisa dipilih kapan saja)
+        function renderMapelOptions(filterText = '') {
+            const dropdown = document.getElementById('mapel-dropdown');
+            const query = filterText.trim().toLowerCase();
+            const filtered = query
+                ? DAFTAR_MAPEL_SD.filter(m => m.toLowerCase().includes(query))
+                : DAFTAR_MAPEL_SD;
+
+            if (filtered.length === 0) {
+                dropdown.innerHTML = `
+                    <div class="px-3.5 py-2.5 text-xs text-slate-500 italic">
+                        Gunakan nama mapel kustom: "<strong class="text-emerald-800">${escapeHtml(filterText)}</strong>"
+                    </div>
+                `;
+                return;
+            }
+
+            dropdown.innerHTML = filtered.map(mapel => `
+                <button type="button" onclick="selectMapel('${mapel.replace(/'/g, "\\'")}')"
+                    class="w-full text-left px-3.5 py-2 text-xs sm:text-sm text-slate-700 hover:bg-emerald-50 hover:text-emerald-900 font-medium transition flex items-center justify-between gap-2">
+                    <span>${escapeHtml(mapel)}</span>
+                    <i class="fa-solid fa-check text-emerald-500 text-xs opacity-0 group-hover:opacity-100"></i>
+                </button>
+            `).join('');
+        }
+
+        function openMapelDropdown(isTyping = false) {
+            const inputVal = document.getElementById('mataPelajaran').value;
+            // Saat diklik/fokus (bukan sedang mengetik), tampilkan SEMUA opsi agar tidak terkunci
+            renderMapelOptions(isTyping ? inputVal : '');
+            document.getElementById('mapel-dropdown').classList.remove('hidden');
+        }
+
+        function toggleMapelDropdown() {
+            const dropdown = document.getElementById('mapel-dropdown');
+            if (dropdown.classList.contains('hidden')) {
+                openMapelDropdown(false);
+                document.getElementById('mataPelajaran').focus();
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+
+        function selectMapel(value) {
+            const input = document.getElementById('mataPelajaran');
+            input.value = value;
+            document.getElementById('mapel-dropdown').classList.add('hidden');
+            document.getElementById('err-mataPelajaran').classList.add('hidden');
+            input.classList.remove('border-rose-500', 'ring-1', 'ring-rose-500');
+        }
+
+        // Navigasi Tab
+        function switchTab(tabName) {
+            ['builder', 'result', 'history'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                const navBtn = document.getElementById(`nav-${t}`);
+                navBtn.classList.remove('bg-amber-400', 'text-emerald-950', 'shadow-sm');
+                navBtn.classList.add('text-emerald-100', 'hover:bg-emerald-800');
+            });
+
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`nav-${tabName}`);
+            activeBtn.classList.remove('text-emerald-100', 'hover:bg-emerald-800');
+            activeBtn.classList.add('bg-amber-400', 'text-emerald-950', 'shadow-sm');
+
+            if (tabName === 'result') {
+                document.getElementById('badge-ready').classList.add('hidden');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle input tema bebas
+        function toggleTemaBebas() {
+            const isBebas = document.getElementById('radio-tema-bebas').checked;
+            const box = document.getElementById('box-tema-bebas');
+            if (isBebas) {
+                box.classList.remove('hidden');
+                document.getElementById('inputTemaBebas').focus();
+            } else {
+                box.classList.add('hidden');
+            }
+        }
+
+        // Toggle Mode Tujuan Pembelajaran (Otomatis vs Manual)
+        function toggleModeTP() {
+            const isManual = document.getElementById('radio-tp-manual').checked;
+            const boxManual = document.getElementById('box-tp-manual');
+            const infoOtomatis = document.getElementById('info-tp-otomatis');
+            const errEl = document.getElementById('err-inputTPManual');
+            const inputEl = document.getElementById('inputTPManual');
+
+            if (isManual) {
+                boxManual.classList.remove('hidden');
+                infoOtomatis.classList.add('hidden');
+                inputEl.focus();
+            } else {
+                boxManual.classList.add('hidden');
+                infoOtomatis.classList.remove('hidden');
+                if (errEl) errEl.classList.add('hidden');
+                if (inputEl) inputEl.classList.remove('border-rose-500', 'ring-1', 'ring-rose-500');
+            }
+        }
+
+        // Toggle Pilihan Visual Simulasi
+        function toggleOpsiSimulasi() {
+            const isChecked = document.getElementById('simulasiInteraktif')?.checked;
+            const box = document.getElementById('box-gaya-simulasi');
+            if (box) {
+                box.classList.toggle('hidden', !isChecked);
+            }
+        }
+
+        // Toggle Pilihan Jenis Game Edukasi
+        function toggleOpsiGame() {
+            const isChecked = document.getElementById('gameEdukasiInteraktif')?.checked;
+            const box = document.getElementById('box-jenis-game');
+            if (box) {
+                box.classList.toggle('hidden', !isChecked);
+            }
+        }
+
+        // Sinkronisasi pemilih warna
+        function syncColorText(pickerId, textId) {
+            const val = document.getElementById(pickerId).value;
+            document.getElementById(textId).value = val;
+        }
+
+        function applyColorPreset(pickerId, textId, hexVal) {
+            document.getElementById(pickerId).value = hexVal;
+            document.getElementById(textId).value = hexVal;
+        }
+
+        // Notifikasi Toast (Pengganti alert())
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const styles = {
+                success: 'bg-emerald-800 text-white border-l-4 border-amber-400',
+                error: 'bg-rose-800 text-white border-l-4 border-rose-300',
+                info: 'bg-slate-800 text-white border-l-4 border-sky-400'
+            };
+
+            const icons = {
+                success: 'fa-circle-check text-amber-400',
+                error: 'fa-triangle-exclamation text-rose-300',
+                info: 'fa-circle-info text-sky-400'
+            };
+
+            toast.className = `${styles[type]} px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 text-xs sm:text-sm font-medium pointer-events-auto transform transition-all duration-300 translate-y-2 opacity-0`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icons[type]} text-base shrink-0"></i>
+                <span class="flex-1">${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            // Animasi masuk
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            // Hilang otomatis setelah 3.5 detik
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Isi Contoh Cepat untuk Memudahkan Guru Mencoba
+        function fillDemoData() {
+            document.getElementById('namaGuru').value = 'Wahyono, S.Pd.SD';
+            document.getElementById('namaSekolah').value = 'SD Negeri Ujungalang 02';
+            document.getElementById('kelas').value = 'Kelas V (Fase C)';
+            document.getElementById('semester').value = 'Semester 1 (Ganjil)';
+            document.getElementById('mataPelajaran').value = 'IPAS (Ilmu Pengetahuan Alam dan Sosial)';
+            document.getElementById('materiPembelajaran').value = 'Rantai Makanan dan Jaring-Jaring Makanan';
+            
+            // Pilih tema Dunia Bawah Laut
+            document.querySelector('input[name="temaVisual"][value="Dunia Bawah Laut"]').checked = true;
+            toggleTemaBebas();
+
+            // Hapus pesan error jika ada
+            clearValidationErrors();
+            showToast('Contoh data pembelajaran berhasil diisikan!', 'info');
+        }
+
+        // Validasi Formulir
+        function clearValidationErrors() {
+            ['namaGuru', 'namaSekolah', 'mataPelajaran', 'materiPembelajaran', 'tipeSoal', 'inputTPManual'].forEach(id => {
+                const errEl = document.getElementById(`err-${id}`);
+                if (errEl) errEl.classList.add('hidden');
+                const inputEl = document.getElementById(id);
+                if (inputEl) inputEl.classList.remove('border-rose-500', 'ring-1', 'ring-rose-500');
+            });
+        }
+
+        function validateForm() {
+            clearValidationErrors();
+            let isValid = true;
+            let firstErrorEl = null;
+
+            const requiredFields = ['namaGuru', 'namaSekolah', 'mataPelajaran', 'materiPembelajaran'];
+            requiredFields.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el.value.trim()) {
+                    isValid = false;
+                    document.getElementById(`err-${id}`).classList.remove('hidden');
+                    el.classList.add('border-rose-500', 'ring-1', 'ring-rose-500');
+                    if (!firstErrorEl) firstErrorEl = el;
+                }
+            });
+
+            // Cek jika TP Manual dipilih tetapi kolom isian kosong
+            const isTPManual = document.getElementById('radio-tp-manual')?.checked;
+            if (isTPManual) {
+                const tpInput = document.getElementById('inputTPManual');
+                if (!tpInput.value.trim()) {
+                    isValid = false;
+                    document.getElementById('err-inputTPManual').classList.remove('hidden');
+                    tpInput.classList.add('border-rose-500', 'ring-1', 'ring-rose-500');
+                    if (!firstErrorEl) firstErrorEl = tpInput;
+                }
+            }
+
+            // Cek minimal 1 tipe soal
+            const checkedSoal = document.querySelectorAll('input[name="tipeSoal"]:checked');
+            if (checkedSoal.length === 0) {
+                isValid = false;
+                document.getElementById('err-tipeSoal').classList.remove('hidden');
+                if (!firstErrorEl) firstErrorEl = document.getElementById('tipe-soal-group');
+            }
+
+            if (!isValid && firstErrorEl) {
+                firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                showToast('Mohon lengkapi data yang wajib diisi terlebih dahulu.', 'error');
+            }
+
+            return isValid;
+        }
+
+        // FUNGSI UTAMA: GENERATE PROMPT LENGKAP
+        function generatePrompt() {
+            if (!validateForm()) return;
+
+            // 0. Ambil Target Platform AI
+            const targetAI = document.querySelector('input[name="targetAI"]:checked')?.value || 'Gemini AI';
+            const isCanva = targetAI === 'Canva AI';
+
+            // 1. Ambil Identitas
+            const namaGuru = document.getElementById('namaGuru').value.trim();
+            const namaSekolah = document.getElementById('namaSekolah').value.trim();
+            const kelas = document.getElementById('kelas').value;
+            const semester = document.getElementById('semester').value;
+            const mapel = document.getElementById('mataPelajaran').value.trim();
+            const materi = document.getElementById('materiPembelajaran').value.trim();
+
+            // 2. Ambil Tema Visual
+            let tema = document.querySelector('input[name="temaVisual"]:checked')?.value || 'Hutan Ajaib';
+            if (tema === 'Tema Bebas') {
+                const customTema = document.getElementById('inputTemaBebas').value.trim();
+                tema = customTema ? `Tema Kustom (${customTema})` : 'Tema Kreatif Ramah Anak';
+            }
+
+            // 3. Ambil Pengaturan Desain & Animasi
+            const warnaDominan = document.getElementById('warnaDominan').value;
+            const warnaDominanSelect = document.getElementById('warnaDominanPreset');
+            const warnaDominanNama = warnaDominanSelect.options[warnaDominanSelect.selectedIndex]?.text || warnaDominan;
+
+            const warnaAksen = document.getElementById('warnaAksen').value;
+            const warnaAksenSelect = document.getElementById('warnaAksenPreset');
+            const warnaAksenNama = warnaAksenSelect.options[warnaAksenSelect.selectedIndex]?.text || warnaAksen;
+
+            const gayaVisual = document.getElementById('gayaVisual').value;
+            const bentukTombol = document.getElementById('bentukTombol').value;
+
+            const animasiDipilih = Array.from(document.querySelectorAll('input[name="animasi"]:checked')).map(el => el.value);
+            const daftarAnimasi = animasiDipilih.length > 0
+                ? animasiDipilih.map(a => `  * ${a}`).join('\n')
+                : '  * Animasi transisi halus yang ramah anak';
+
+            // 4. Ambil Pengaturan TP & Materi
+            const isTPManual = document.getElementById('radio-tp-manual')?.checked;
+            const teksTPManual = document.getElementById('inputTPManual')?.value.trim() || '';
+            const instruksiTP = isTPManual && teksTPManual
+                ? `Gunakan rumusan Tujuan Pembelajaran (TP) berikut secara tepat pada menu/bagian Tujuan Pembelajaran:\n${teksTPManual}`
+                : `Rumuskan secara otomatis 2–3 butir Tujuan Pembelajaran (TP) yang spesifik, terukur, dan sesuai dengan Kurikulum Merdeka (${kelas}) untuk topik "${materi}".`;
+
+            const komponenDipilih = Array.from(document.querySelectorAll('input[name="komponenMateri"]:checked')).map(el => el.value);
+            const daftarKomponenMateri = komponenDipilih.length > 0
+                ? komponenDipilih.map(k => `- ${k}`).join('\n')
+                : '- Penjelasan materi bertahap dengan contoh konkret';
+
+            const pakaiSimulasi = document.getElementById('simulasiInteraktif')?.checked;
+            const gayaSimulasi = document.getElementById('gayaSimulasi')?.value || 'Sangat Realistis & Konkret';
+
+            const pakaiGame = document.getElementById('gameEdukasiInteraktif')?.checked;
+            const jenisGame = document.getElementById('jenisGameEdukasi')?.value || 'Otomatis Sesuai Karakteristik Materi';
+
+            // 5. Ambil Pengaturan Evaluasi
+            const jumlahSoal = document.getElementById('jumlahSoal').value;
+            const tingkatKesulitan = document.getElementById('tingkatKesulitan').value;
+            const tipeSoalDipilih = Array.from(document.querySelectorAll('input[name="tipeSoal"]:checked')).map(el => el.value);
+            const umpanBalik = document.getElementById('umpanBalikOtomatis').checked;
+            const penilaian = document.getElementById('penilaianOtomatis').checked;
+
+            // Rangkai Header Pembuka & Standar Teknis sesuai Target AI (Gemini AI vs Canva AI)
+            const pembukaPrompt = isCanva
+                ? `Buatkan aplikasi **Media Pembelajaran Interaktif (MPI)** menggunakan **Canva Code** (aplikasi web interaktif berbasis React/HTML/Tailwind CSS dalam satu komponen/file utuh) dengan desain visual modern, ramah siswa Sekolah Dasar, dan responsif untuk layar presentasi kelas, tablet, maupun HP.\n\nSusun aplikasi ini secara lengkap dan langsung dapat dijalankan di pratinjau Canva berdasarkan spesifikasi rinci berikut:`
+                : `Bertindaklah sebagai Pengembang Web Edukasi Senior (EdTech Developer) dan Desainer Pembelajaran Sekolah Dasar yang ahli dalam membuat Media Pembelajaran Interaktif (MPI) berbasis HTML5, CSS3 (Tailwind CSS), dan JavaScript dalam satu file mandiri (single-file HTML) yang responsif untuk HP, tablet, maupun laptop.\n\nBuatkan aplikasi **Media Pembelajaran Interaktif (MPI)** lengkap dan langsung dapat dijalankan dengan spesifikasi rinci berikut:`;
+
+            const standarTeknisPrompt = isCanva
+                ? `====================================================================
+5. STANDAR TEKNIS KHUSUS CANVA AI (CANVA CODE)
+====================================================================
+1. Bangun seluruh kode dalam **SATU KOMPONEN / FILE CANVA CODE UTUH** yang langsung berjalan mulus di pratinjau interaktif Canva tanpa bergantung pada file eksternal atau URL gambar luar.
+2. **Efisiensi & Anti-Terpotong:** Tulis kode secara modular, bersih, dan ringkas agar seluruh fitur (Beranda, Tujuan, Materi, Simulasi/Game, dan Kuis Evaluasi) selesai dihasilkan dalam satu kali respons utuh tanpa terpotong di tengah jalan.
+3. **Tata Letak Presentasi & Sentuh:** Optimalkan tata letak kartu interaktif agar terlihat tajam dan proporsional saat dipresentasikan di layar besar Canva maupun disentuh siswa di tablet/HP.
+4. Jangan gunakan fungsi \`alert()\` atau \`confirm()\` bawaan browser; gunakan modal atau notifikasi interaktif di dalam layar aplikasi.
+5. Pastikan semua tombol navigasi, simulasi, mini-game, dan perhitungan nilai kuis benar-benar berfungsi tanpa error.`
+                : `====================================================================
+5. STANDAR TEKNIS WAJIB (GEMINI AI / CANVAS)
+====================================================================
+1. Buat seluruh kode dalam **SATU FILE HTML LENGKAP** (HTML + CSS + JS) yang langsung siap dijalankan tanpa perlu instalasi atau server tambahan.
+2. Desain harus 100% responsif (nyaman di layar HP layar sentuh, tablet, maupun proyektor kelas).
+3. Jangan gunakan fungsi \`alert()\` atau \`confirm()\` bawaan browser; gunakan modal atau kotak pesan interaktif di dalam layar aplikasi.
+4. Pastikan semua tombol navigasi, aktivitas interaktif, dan perhitungan kuis benar-benar berfungsi dengan baik tanpa error.`;
+
+            // Rangkai Prompt Terstruktur & Siap Eksekusi
+            const finalPrompt = `${pembukaPrompt}
+
+====================================================================
+1. IDENTITAS PEMBELAJARAN
+====================================================================
+- Target Platform   : ${targetAI}
+- Nama Sekolah      : ${namaSekolah}
+- Nama Guru         : ${namaGuru}
+- Jenjang / Kelas   : Sekolah Dasar - ${kelas}
+- Semester          : ${semester}
+- Mata Pelajaran    : ${mapel}
+- Materi Pokok      : ${materi}
+
+====================================================================
+2. KONSEP VISUAL, DESAIN & ANIMASI (HANYA TAMPILAN ANTARMUKA / UI)
+====================================================================
+- Tema Visual Latar   : **${tema}**
+  *ATURAN PENTING PEMISAHAN TEMA & MATERI:* Tema "${tema}" **HANYA** diterapkan sebagai estetika tampilan antarmuka (UI), latar belakang layar, bingkai kartu, ikon navigasi, dan dekorasi visual semata. **JANGAN** mengubah atau memaksakan konteks isi materi, contoh kehidupan sehari-hari, maupun soal kuis agar mengikuti tema "${tema}". Seluruh konten materi dan soal harus tetap murni, objektif, dan proporsional sesuai topik "${materi}" secara umum (kecuali jika topik materinya sendiri memang membahas tema tersebut).
+- Gaya Ilustrasi/UI  : ${gayaVisual}.
+  *KUALITAS VISUAL OBJEK KONKRET:* Jika dipilih gaya realistis/semi-realistis/ensiklopedia, pastikan elemen ilustrasi (seperti bentuk daun, urat/tulang daun, tekstur batang, hewan, maupun alat peraga materi) digambar **detail, berlapis gradasi, berbayang alami, dan proporsional mendekati wujud aslinya** menggunakan SVG/Canvas tingkat lanjut—bukan sekadar ikon kartun polos yang terlalu sederhana—agar siswa SD (terutama kelas tinggi seperti Kelas IV–VI) mendapatkan gambaran visual yang konkret dan ilmiah.
+- Palet Warna Utama  : Warna Dominan ${warnaDominanNama} (${warnaDominan}) dipadukan dengan Warna Aksen ${warnaAksenNama} (${warnaAksen}) serta latar belakang kartu materi yang bersih/kontras agar teks sangat mudah dibaca siswa SD.
+- Bentuk Tombol UI   : Gunakan gaya tombol **${bentukTombol}** dengan efek hover dan klik yang responsif serta ukuran ramah sentuhan jari anak.
+- Efek Animasi & Audio yang Wajib Diimplementasikan:
+${daftarAnimasi}
+*(Pastikan seluruh ilustrasi menggunakan SVG/Emoji/Canvas buatan kode sendiri tanpa URL gambar eksternal yang berisiko rusak, serta gunakan Web Audio API / Tone.js jika efek suara diaktifkan).*
+
+====================================================================
+3. STRUKTUR NAVIGASI, TUJUAN & KONTEN MATERI (${kelas})
+====================================================================
+Susun materi "${materi}" secara murni dan komprehensif (tidak dibatasi oleh tema visual tampilan) menggunakan bahasa Indonesia yang komunikatif, hangat, dan sesuai dengan tingkat pemahaman kognitif siswa **${kelas}**. Sediakan menu navigasi yang berfungsi penuh (Beranda, Tujuan, Materi & Eksplorasi${pakaiSimulasi ? ', Simulasi Interaktif' : ''}${pakaiGame ? ', Game Edukasi' : ''}, Contoh Soal, Kuis Evaluasi).
+
+Tujuan Pembelajaran (TP):
+${instruksiTP}
+
+Komponen Materi yang Wajib Ada:
+- Penjelasan konsep inti "${materi}" secara runtut, jelas, disertai ilustrasi visual pendukung (SVG/Canvas) dan contoh konkret dalam kehidupan sehari-hari.
+${daftarKomponenMateri}
+${pakaiSimulasi ? `
+*INSTRUKSI KHUSUS MENU SIMULASI INTERAKTIF (WAJIB REALISTIS & KONKRET):*
+- Sediakan tab/menu khusus **"Simulasi"** di bilah navigasi agar siswa dapat mempraktikkan langsung konsep "${materi}" secara visual.
+- **Standar Visual Simulasi:** ${gayaSimulasi}.
+- **Larangan Simulasi Sederhana:** Jangan membuat simulasi yang hanya berupa kotak teks, tombol pilihan biasa, atau bentuk geometris/kartun terlalu sederhana! Bangun panggung simulasi interaktif menggunakan HTML5 Canvas atau SVG berlapis dengan gradasi warna alami, pencahayaan, bayangan, tekstur objek nyata (misalnya: helai daun hijau lengkap dengan urat/tulang daun, stomata/gelembung oksigen, berkas cahaya matahari, aliran air dari akar ke daun, atau wujud makhluk hidup dan komponen alam yang detail dan proporsional) sehingga siswa kelas tinggi (seperti Kelas IV–VI) melihat gambaran konkret seperti peristiwa aslinya.
+- **Interaktivitas Sebab-Akibat:** Berikan kontrol manipulasi nyata bagi siswa (seperti slider pengatur intensitas cahaya/air/suhu, drag-and-drop komponen, atau tombol aksi percobaan) disertai indikator perubahan langsung dan penjelasan ilmiah singkat atas hasil percobaan siswa!` : ''}
+${pakaiGame ? `
+*INSTRUKSI KHUSUS MENU GAME EDUKASI INTERAKTIF (TERINTEGRASI & RINGAN):*
+- Sediakan tab/menu khusus **"Game Edukasi"** di bilah navigasi sebagai sarana bermain sambil belajar yang terintegrasi di dalam aplikasi ini.
+- **Format Permainan:** ${jenisGame}.
+- **Mekanik & Umpan Balik Permainan:** Lengkapi permainan dengan papan skor (poin), indikator nyawa (hati) atau penghitung waktu mundur (timer), efek visual menyenangkan saat jawaban benar/salah, tombol "Mulai Permainan" & "Main Lagi", serta layar perolehan bintang/skor akhir.
+- **Efisiensi Kode (Anti-Terpotong):** Bangun logika mini-game menggunakan manipulasi DOM/SVG/Canvas yang bersih, modular, dan efisien agar seluruh kode aplikasi tetap ringkas, tidak bertele-tele, dan selesai utuh dalam satu file tanpa terpotong.` : ''}
+
+====================================================================
+4. SISTEM EVALUASI & KUIS INTERAKTIF
+====================================================================
+- Jumlah Soal       : **${jumlahSoal} butir soal** yang menguji pemahaman murni tentang "${materi}" secara menyeluruh (tidak dibatasi hanya pada konteks tema visual tampilan).
+- Tingkat Kesulitan : ${tingkatKesulitan}.
+- Bentuk/Tipe Soal  : ${tipeSoalDipilih.join(', ')}.
+- Kunci Jawaban     : Setiap soal wajib memiliki kunci jawaban yang akurat dan tervalidasi dalam logika program.
+- Sistem Umpan Balik: ${umpanBalik ? 'AKTIF — Setiap kali siswa menjawab soal, tampilkan umpan balik instan (notifikasi ramah anak) yang menjelaskan mengapa jawaban tersebut benar atau memberikan petunjuk/pembahasan singkat jika jawaban salah.' : 'Tampilkan status benar/salah setelah kuis selesai.'}
+- Penilaian Otomatis: ${penilaian ? 'AKTIF — Hitung skor akhir otomatis dalam skala 0–100, tampilkan rekap jawaban benar/salah, pesan motivasi sesuai perolehan nilai, tombol "Ulangi Kuis", serta tampilan Piagam/Sertifikat Digital sederhana bertuliskan nama siswa dan nama guru.' : 'Tampilkan jumlah jawaban benar di akhir sesi.'}
+
+${standarTeknisPrompt}`;
+
+            // Masukkan ke textarea hasil
+            const outputEl = document.getElementById('prompt-output');
+            outputEl.value = finalPrompt;
+            updateCounts();
+
+            // Simpan metadata sementara untuk tombol Simpan Riwayat
+            currentPromptMeta = {
+                id: Date.now(),
+                tanggal: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                targetAI,
+                namaGuru,
+                namaSekolah,
+                kelas,
+                mapel,
+                materi,
+                tema,
+                jumlahSoal
+            };
+
+            updateResultTargetUI(targetAI);
+            document.getElementById('result-meta-badge').textContent = `${kelas} • ${mapel} • ${materi}`;
+            document.getElementById('badge-ready').classList.remove('hidden');
+
+            // Simpan otomatis ke riwayat lokal agar tidak hilang
+            saveToLocalStorage(currentPromptMeta, finalPrompt, true);
+
+            // Pindah otomatis ke tab Hasil Prompt
+            switchTab('result');
+            showToast(`Prompt versi ${targetAI} berhasil dibuat dan disimpan ke riwayat!`, 'success');
+        }
+
+        // Perbarui tampilan badge & tombol pada tab Hasil sesuai Target AI aktif
+        function updateResultTargetUI(targetAI) {
+            const isCanva = targetAI === 'Canva AI';
+            const targetBadge = document.getElementById('result-target-badge');
+            const switchBtn = document.getElementById('btn-switch-target');
+            const switchLabel = document.getElementById('btn-switch-target-label');
+            const openBtn = document.getElementById('btn-open-target-ai');
+            const openIcon = document.getElementById('icon-open-target-ai');
+            const openLabel = document.getElementById('label-open-target-ai');
+            const tipText = document.getElementById('result-tip-text');
+
+            if (isCanva) {
+                targetBadge.textContent = 'Target: Canva AI (Canva Code)';
+                targetBadge.className = 'px-2.5 py-0.5 bg-purple-500/40 border border-purple-300/50 text-white text-xs font-bold rounded-full';
+                switchLabel.textContent = 'Bandingkan: Versi Gemini AI';
+                switchBtn.className = 'px-3.5 py-2.5 bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-300/40 font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-1.5';
+                openBtn.className = 'px-4 py-2.5 bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition flex items-center gap-2';
+                openIcon.className = 'fa-solid fa-wand-magic-sparkles';
+                openLabel.textContent = 'SALIN & BUKA CANVA AI';
+                tipText.textContent = 'Tips: Buka Canva AI -> pilih fitur "Code for me" / Canva Code, lalu tempelkan prompt ini!';
+            } else {
+                targetBadge.textContent = 'Target: Gemini AI (Canvas)';
+                targetBadge.className = 'px-2.5 py-0.5 bg-sky-500/30 border border-sky-300/40 text-white text-xs font-bold rounded-full';
+                switchLabel.textContent = 'Bandingkan: Versi Canva AI';
+                switchBtn.className = 'px-3.5 py-2.5 bg-purple-600/90 hover:bg-purple-500 text-white border border-purple-300/40 font-bold text-xs rounded-xl shadow-sm transition flex items-center gap-1.5';
+                openBtn.className = 'px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition flex items-center gap-2';
+                openIcon.className = 'fa-solid fa-sparkles';
+                openLabel.textContent = 'SALIN & BUKA GEMINI AI';
+                tipText.textContent = 'Tips: Tempelkan prompt ini di Gemini AI (Canvas / Chat) untuk langsung mendapatkan aplikasi MPI-nya!';
+            }
+        }
+
+        // Beralih cepat antara Gemini AI dan Canva AI dari halaman Hasil untuk perbandingan
+        function switchTargetAndRegenerate() {
+            const currentTarget = currentPromptMeta?.targetAI || document.querySelector('input[name="targetAI"]:checked')?.value || 'Gemini AI';
+            const nextTarget = currentTarget === 'Gemini AI' ? 'Canva AI' : 'Gemini AI';
+            const radioToSelect = document.querySelector(`input[name="targetAI"][value="${nextTarget}"]`);
+            if (radioToSelect) {
+                radioToSelect.checked = true;
+            }
+            generatePrompt();
+        }
+        // Salin Prompt Otomatis & Buka Platform AI Target di Tab Baru
+        function copyAndOpenTargetAI() {
+            const outputEl = document.getElementById('prompt-output');
+            if (!outputEl.value.trim()) {
+                showToast('Belum ada prompt! Silakan klik "BUAT PROMPT SEKARANG" terlebih dahulu.', 'error');
+                return;
+            }
+
+            const targetAI = currentPromptMeta?.targetAI || document.querySelector('input[name="targetAI"]:checked')?.value || 'Gemini AI';
+            const isCanva = targetAI === 'Canva AI';
+            const targetUrl = isCanva ? 'https://www.canva.com/ai' : 'https://gemini.google.com/app';
+
+            copyPrompt();
+            window.open(targetUrl, '_blank', 'noopener,noreferrer');
+            showToast(`Prompt tersalin! Tab ${targetAI} dibuka — tinggal tempel (Ctrl+V / Paste).`, 'info');
+        }
+
+        // Simpan Manual dari Tombol Simpan Prompt (termasuk jika sudah diedit)
+        function saveCurrentPromptToHistory() {
+            const promptText = document.getElementById('prompt-output').value.trim();
+            if (!promptText) {
+                showToast('Kotak prompt masih kosong, tidak ada yang dapat disimpan.', 'error');
+                return;
+            }
+
+            const meta = currentPromptMeta || {
+                id: Date.now(),
+                tanggal: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                targetAI: document.querySelector('input[name="targetAI"]:checked')?.value || 'Gemini AI',
+                namaGuru: document.getElementById('namaGuru').value.trim() || 'Guru SD',
+                namaSekolah: document.getElementById('namaSekolah').value.trim() || 'Sekolah Dasar',
+                kelas: document.getElementById('kelas').value,
+                mapel: document.getElementById('mataPelajaran').value.trim() || 'Umum',
+                materi: document.getElementById('materiPembelajaran').value.trim() || 'Prompt Kustom',
+                tema: document.querySelector('input[name="temaVisual"]:checked')?.value || 'Kustom',
+                jumlahSoal: document.getElementById('jumlahSoal').value
+            };
+
+            // Buat ID baru jika disimpan manual sebagai versi edit
+            const newMeta = {
+                ...meta,
+                id: Date.now(),
+                tanggal: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+            };
+
+            saveToLocalStorage(newMeta, promptText, false);
+            showToast('Perubahan prompt berhasil disimpan ke Riwayat!', 'success');
+        }
+
+        // Manajemen LocalStorage
+        function getHistory() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveToLocalStorage(meta, promptText, isAuto) {
+            let history = getHistory();
+            
+            // Jika auto-save dan item teratas memiliki materi, guru, & target AI yang sama persis, perbarui saja agar versi Gemini & Canva tersimpan berdampingan
+            if (isAuto && history.length > 0 && history[0].materi === meta.materi && history[0].namaGuru === meta.namaGuru && (history[0].targetAI || 'Gemini AI') === meta.targetAI) {
+                history[0] = { ...meta, promptText };
+            } else {
+                history.unshift({ ...meta, promptText });
+            }
+
+            // Batasi maksimal 25 riwayat terbaru agar ringan
+            if (history.length > 25) history = history.slice(0, 25);
+
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+                renderHistory();
+            } catch (e) {
+                showToast('Penyimpanan browser penuh. Hapus beberapa riwayat lama.', 'error');
+            }
+        }
+
+        function renderHistory() {
+            const history = getHistory();
+            const container = document.getElementById('history-list');
+            const countBadge = document.getElementById('history-count');
+            const clearBtn = document.getElementById('btn-clear-history');
+
+            countBadge.textContent = history.length;
+
+            if (history.length === 0) {
+                clearBtn.classList.add('hidden');
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-3">
+                            <i class="fa-solid fa-folder-open text-xl"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-slate-700 text-sm">Belum Ada Riwayat Prompt</h3>
+                        <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">Setiap prompt yang Anda buat akan otomatis tersimpan di sini agar mudah digunakan kembali kapan saja.</p>
+                        <button type="button" onclick="switchTab('builder')" class="mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition">
+                            Mulai Buat Prompt
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            clearBtn.classList.remove('hidden');
+            container.innerHTML = history.map((item, index) => {
+                const platform = item.targetAI || 'Gemini AI';
+                const isCanva = platform === 'Canva AI';
+                const platformBadgeClass = isCanva
+                    ? 'bg-purple-100 text-purple-800 border border-purple-200'
+                    : 'bg-sky-100 text-sky-800 border border-sky-200';
+                const openBtnClass = isCanva
+                    ? 'bg-purple-600 hover:bg-purple-500'
+                    : 'bg-blue-600 hover:bg-blue-500';
+                const shortPlatform = isCanva ? 'Canva' : 'Gemini';
+
+                return `
+                <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:border-emerald-300 transition flex flex-col justify-between gap-3 shadow-sm">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2 flex-wrap">
+                            <div class="flex items-center gap-1.5">
+                                <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-full">
+                                    ${escapeHtml(item.kelas)}
+                                </span>
+                                <span class="px-2 py-0.5 ${platformBadgeClass} text-[11px] font-bold rounded-full">
+                                    ${escapeHtml(platform)}
+                                </span>
+                            </div>
+                            <span class="text-[11px] text-slate-400">
+                                <i class="fa-regular fa-clock mr-1"></i>${escapeHtml(item.tanggal)}
+                            </span>
+                        </div>
+                        <h4 class="font-display font-bold text-slate-800 text-sm line-clamp-1">${escapeHtml(item.materi)}</h4>
+                        <p class="text-xs text-emerald-700 font-medium mt-0.5">${escapeHtml(item.mapel)}</p>
+                        <div class="mt-2 flex flex-wrap gap-1.5 text-[11px] text-slate-600">
+                            <span class="px-2 py-0.5 bg-white border border-slate-200 rounded-md">🎨 ${escapeHtml(item.tema)}</span>
+                            <span class="px-2 py-0.5 bg-white border border-slate-200 rounded-md">📝 ${escapeHtml(item.jumlahSoal)} Soal</span>
+                            <span class="px-2 py-0.5 bg-white border border-slate-200 rounded-md">👩‍🏫 ${escapeHtml(item.namaGuru)}</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-200/70 flex items-center justify-between gap-2">
+                        <button type="button" onclick="loadHistoryItem(${index})" class="flex-1 py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Buka</span>
+                        </button>
+                        <button type="button" onclick="copyHistoryItem(${index})" class="py-2 px-2.5 bg-amber-400 hover:bg-amber-300 text-emerald-950 text-xs font-bold rounded-xl transition" title="Salin Prompt">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                        <button type="button" onclick="copyAndOpenTargetAIFromHistory(${index})" class="py-2 px-2.5 ${openBtnClass} text-white text-xs font-bold rounded-xl transition flex items-center gap-1" title="Salin & Buka ${escapeHtml(platform)}">
+                            <i class="fa-solid fa-sparkles"></i>
+                            <span class="hidden sm:inline">${shortPlatform}</span>
+                        </button>
+                        <button type="button" onclick="deleteHistoryItem(${index})" class="py-2 px-2.5 bg-white hover:bg-rose-50 text-rose-600 border border-slate-200 hover:border-rose-200 text-xs font-semibold rounded-xl transition" title="Hapus">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function loadHistoryItem(index) {
+            const history = getHistory();
+            const item = history[index];
+            if (!item) return;
+
+            const platform = item.targetAI || 'Gemini AI';
+            document.getElementById('prompt-output').value = item.promptText;
+            document.getElementById('result-meta-badge').textContent = `${item.kelas} • ${item.mapel} • ${item.materi}`;
+            currentPromptMeta = { ...item, targetAI: platform };
+            updateResultTargetUI(platform);
+            updateCounts();
+            switchTab('result');
+            showToast(`Prompt ${platform} dari riwayat dimuat ke editor.`, 'info');
+        }
+
+        function copyHistoryItem(index) {
+            const history = getHistory();
+            const item = history[index];
+            if (!item) return;
+
+            const tempArea = document.createElement('textarea');
+            tempArea.value = item.promptText;
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempArea);
+            showToast(`Prompt "${item.materi}" berhasil disalin!`, 'success');
+        }
+
+        function copyAndOpenTargetAIFromHistory(index) {
+            const history = getHistory();
+            const item = history[index];
+            if (!item) return;
+
+            const platform = item.targetAI || 'Gemini AI';
+            const targetUrl = platform === 'Canva AI' ? 'https://www.canva.com/ai' : 'https://gemini.google.com/app';
+
+            copyHistoryItem(index);
+            window.open(targetUrl, '_blank', 'noopener,noreferrer');
+            showToast(`Tab ${platform} dibuka — tinggal tempel (Ctrl+V / Paste) prompt Anda!`, 'info');
+        }
+
+        // Hitung Karakter & Kata pada Hasil Prompt
+        function updateCounts() {
+            const text = document.getElementById('prompt-output').value;
+            const chars = text.length;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('char-count').textContent = `${chars.toLocaleString('id-ID')} karakter`;
+            document.getElementById('word-count').textContent = `${words.toLocaleString('id-ID')} kata`;
+        }
+
+        // Salin Prompt ke Clipboard (Menggunakan execCommand agar aman di iframe/Canvas)
+        function copyPrompt() {
+            const outputEl = document.getElementById('prompt-output');
+            if (!outputEl.value.trim()) {
+                showToast('Belum ada prompt untuk disalin. Buat prompt terlebih dahulu!', 'error');
+                return;
+            }
+
+            outputEl.select();
+            outputEl.setSelectionRange(0, 999999);
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('Prompt berhasil disalin! Silakan tempel (Paste) di platform AI.', 'success');
+                } else {
+                    throw new Error('Gagal execCommand');
+                }
+            } catch (err) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(outputEl.value)
+                        .then(() => showToast('Prompt berhasil disalin ke clipboard!', 'success'))
+                        .catch(() => showToast('Gagal menyalin otomatis. Silakan tekan Ctrl+C.', 'error'));
+                } else {
+                    showToast('Silakan tekan Ctrl+C (atau tahan & Salin) pada kotak teks.', 'info');
+                }
+            }
+        }
+
+        function deleteHistoryItem(index) {
+            let history = getHistory();
+            history.splice(index, 1);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+            renderHistory();
+            showToast('Item riwayat dihapus.', 'info');
+        }
+
+        function clearAllHistory() {
+            // Menggunakan konfirmasi dua-klik pada tombol agar tidak memakai confirm() bawaan browser
+            const btn = document.getElementById('btn-clear-history');
+            if (btn.dataset.confirming !== 'true') {
+                btn.dataset.confirming = 'true';
+                btn.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i><span>Klik Sekali Lagi untuk Konfirmasi</span>';
+                btn.classList.replace('bg-rose-100/80', 'bg-rose-600');
+                btn.classList.replace('text-rose-800', 'text-white');
+                setTimeout(() => {
+                    btn.dataset.confirming = 'false';
+                    btn.innerHTML = '<i class="fa-solid fa-trash-can"></i><span>Hapus Semua Riwayat</span>';
+                    btn.classList.replace('bg-rose-600', 'bg-rose-100/80');
+                    btn.classList.replace('text-white', 'text-rose-800');
+                }, 3000);
+                return;
+            }
+
+            localStorage.removeItem(STORAGE_KEY);
+            btn.dataset.confirming = 'false';
+            btn.innerHTML = '<i class="fa-solid fa-trash-can"></i><span>Hapus Semua Riwayat</span>';
+            btn.classList.replace('bg-rose-600', 'bg-rose-100/80');
+            btn.classList.replace('text-white', 'text-rose-800');
+            renderHistory();
+            showToast('Seluruh riwayat prompt telah dibersihkan.', 'info');
+        }
+
+        // Reset Formulir
+        function resetForm() {
+            document.getElementById('mpi-form').reset();
+            document.getElementById('warnaDominan').value = '#10b981';
+            document.getElementById('warnaAksen').value = '#fbbf24';
+            toggleTemaBebas();
+            toggleModeTP();
+            toggleOpsiSimulasi();
+            toggleOpsiGame();
+            clearValidationErrors();
+            showToast('Formulir telah dikembalikan ke pengaturan awal.', 'info');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Sanitasi HTML sederhana untuk tampilan riwayat
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+</body>
+</html>
